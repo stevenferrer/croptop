@@ -12,7 +12,7 @@ import (
 	"github.com/sf9v/croptop"
 )
 
-func TestImage(t *testing.T) {
+func TestCrop(t *testing.T) {
 	_, err := croptop.Decode(new(bytes.Buffer))
 	assert.Error(t, err)
 
@@ -22,22 +22,24 @@ func TestImage(t *testing.T) {
 	img, err := croptop.Decode(r)
 	require.NoError(t, err)
 
-	height := 691.2
-	width := 460.8
-	offsetX := 434.7
-	offsetY := 50.48
+	height := 296.0
+	width := 197.0
+	offsetX := 666.0
+	offsetY := 66.0
 
-	buf := new(bytes.Buffer)
-	err = img.Width(width).Height(height).
+	buf := &bytes.Buffer{}
+	err = img.Height(height).Width(width).
 		OffsetX(offsetX).OffsetY(offsetY).
 		Crop().Encode(buf)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
-	// verify the result for image
+	// verify the dimensions of the resulting image
 	out, err := imaging.Decode(buf)
 	require.NoError(t, err)
 
 	rect := out.Bounds()
-	assert.Equal(t, 461, rect.Max.X)
-	assert.Equal(t, 691, rect.Max.Y)
+	// height
+	assert.Equal(t, 296, rect.Max.Y)
+	// width
+	assert.Equal(t, 197, rect.Max.X)
 }
