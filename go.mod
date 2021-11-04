@@ -1,4 +1,4 @@
-module github.com/sf9v/croptop
+module github.com/stevenferrer/croptop
 
 go 1.15
 

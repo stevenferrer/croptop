@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/sf9v/croptop"
+	"github.com/stevenferrer/croptop"
 )
 
 func TestCrop(t *testing.T) {
